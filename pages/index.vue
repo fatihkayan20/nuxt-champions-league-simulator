@@ -1,10 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Stage } from "~~/types/Stage";
+
+const { activeStage, canShowNextButton } = useTournamentStore();
+const { hasEnoughTeams } = useTeamsStore();
+</script>
 <template>
   <div class="container mx-auto">
     <LazyGroups />
 
-    <LazyTeamAddInput />
+    <div v-if="!hasEnoughTeams">
+      <LazyTeamAddInput />
+    </div>
 
-    <LazyResultTable />
+    <div v-if="activeStage === Stage.Group">
+      <LazySimulateGroupStage />
+    </div>
+
+    <div v-if="canShowNextButton">
+      <LazyNextStepButton />
+    </div>
   </div>
 </template>

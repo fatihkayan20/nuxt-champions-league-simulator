@@ -1,9 +1,31 @@
 <script setup lang="ts">
 import { ITeam } from "~~/types/ITeam";
-defineProps<{
+const props = defineProps<{
   teams: ITeam[];
   groupName: string;
 }>();
+
+const sortedTeams = computed(() => {
+  return props.teams.sort((a: ITeam, b: ITeam) => {
+    if (a.points > b.points) {
+      return -1;
+    }
+
+    if (a.points < b.points) {
+      return 1;
+    }
+
+    if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
+      return -1;
+    }
+
+    if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
+      return 1;
+    }
+
+    return 0;
+  });
+});
 </script>
 
 <template>
@@ -12,15 +34,16 @@ defineProps<{
     name="team-list"
     class="border flex-1 bg-slate-500"
   >
-    <h2 class="text-center border-b">{{ groupName }}</h2>
+    <h2 class="text-center border-b">{{ groupName.toLocaleUpperCase() }}</h2>
 
-    <div v-for="team in teams" :key="team.id">
-      <Team :team="team" />
+    <div v-for="team in sortedTeams" :key="team.id">
+      <LazyTeam :team="team" />
     </div>
   </TransitionGroup>
 </template>
 
 <style>
+.team-list-move,
 .team-list-enter-active,
 .team-list-leave-active {
   transition: all 0.5s;

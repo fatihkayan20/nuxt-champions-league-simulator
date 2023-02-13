@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ITeam } from "~~/types/ITeam";
 const { allTeams } = useTeamsStore();
 </script>
 

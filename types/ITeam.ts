@@ -7,6 +7,6 @@ export interface ITeam {
   readonly gameLost: number;
   readonly goalFor: number;
   readonly goalAgainst: number;
-  readonly goalDifference: number;
   readonly points: number;
+  readonly group: "a" | "b" | "c" | "d";
 }
