@@ -26,10 +26,8 @@ onMounted(() => {
 <template>
   <h2>Final</h2>
 
-  <div class="flex flex-wrap items-center gap-10 w-full" v-if="!finalWinner">
-    <div v-for="match in playedMatches" :key="match.id">
-      <LazyEliminationMatchCard :match="match" />
-    </div>
+  <div v-if="!finalWinner">
+    <LazyEliminationCards :playedMatches="playedMatches" />
   </div>
 
   <div v-if="finalWinner">
