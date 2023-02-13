@@ -13,6 +13,7 @@ export const useTournamentStore = () => {
     [],
   ]);
   const semiFinals = useState<ITeam[][]>("semiFinals", () => [[], []]);
+  const finals = useState<ITeam[][]>("finals", () => [[]]);
 
   watch(hasEnoughTeams, (newValue) => {
     if (newValue) {
@@ -25,5 +26,6 @@ export const useTournamentStore = () => {
     canShowNextButton,
     quarterFinals,
     semiFinals,
+    finals,
   };
 };

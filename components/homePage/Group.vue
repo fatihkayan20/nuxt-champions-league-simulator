@@ -6,16 +6,9 @@ const props = defineProps<{
   groupName: string;
 }>();
 
-const { activeStage } = useTournamentStore();
+const { activeStage, quarterFinals, semiFinals, finals } = useTournamentStore();
 
 const teamNeeded = computed(() => {
-  if (
-    activeStage.value === Stage.Final ||
-    activeStage.value === Stage.SemiFinal
-  ) {
-    return 1;
-  }
-
   if (activeStage.value === Stage.QuarterFinal) {
     return 2;
   }
@@ -23,8 +16,20 @@ const teamNeeded = computed(() => {
   return 4;
 });
 
+const filterByGroup = (teams: ITeam[]) => {
+  return teams.filter((team) => team.group === props.groupName);
+};
+
 const sortedTeams = computed(() => {
-  return props.teams
+  const data = finals.value?.[0]?.[0]
+    ? filterByGroup(finals.value.flat())
+    : semiFinals.value?.[0]?.[0]
+    ? filterByGroup(semiFinals.value.flat())
+    : quarterFinals.value?.[0]?.[0]
+    ? filterByGroup(quarterFinals.value.flat())
+    : props.teams;
+
+  return data
     .sort((a: ITeam, b: ITeam) => {
       if (a.points > b.points) {
         return -1;
