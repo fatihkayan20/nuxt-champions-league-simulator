@@ -40,27 +40,9 @@ const sortedTeams = computed(() => {
     ? filterByGroup(quarterFinals.value.flat())
     : props.teams;
 
-  return data
-    .sort((a: ITeam, b: ITeam) => {
-      if (a.points > b.points) {
-        return -1;
-      }
+  const sortedData = sortTeams(data);
 
-      if (a.points < b.points) {
-        return 1;
-      }
-
-      if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
-        return -1;
-      }
-
-      if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
-        return 1;
-      }
-
-      return 0;
-    })
-    .slice(0, teamNeeded.value);
+  return sortedData.slice(0, teamNeeded.value);
 });
 </script>
 

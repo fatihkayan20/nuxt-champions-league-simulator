@@ -62,27 +62,11 @@ const getQuarterFinals = () => {
   const groups = Object.keys(allTeams.value);
 
   return groups.map((group) => {
-    return allTeams.value[group]
-      .sort((a: ITeam, b: ITeam) => {
-        if (a.points > b.points) {
-          return -1;
-        }
+    const teams = allTeams.value[group];
 
-        if (a.points < b.points) {
-          return 1;
-        }
+    const sortedTeams = sortTeams(teams);
 
-        if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
-          return -1;
-        }
-
-        if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
-          return 1;
-        }
-
-        return 0;
-      })
-      .slice(0, 2);
+    return sortedTeams.slice(0, 2);
   });
 };
 
