@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
-
 <template>
-  <LazyGroups />
+  <div class="container mx-auto">
+    <LazyGroups />
 
-  <LazyTeamAddInput />
+    <LazyTeamAddInput />
+
+    <LazyResultTable />
+  </div>
 </template>

@@ -7,5 +7,8 @@ defineProps<{
 </script>
 
 <template>
-  <div>{{ team.name }}</div>
+  <div class="flex items-center justify-between p-2">
+    <span>{{ team.name }}</span>
+    <LazyTeamStats :team="team" />
+  </div>
 </template>
