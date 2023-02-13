@@ -4,29 +4,9 @@ import { ITeam } from "~~/types/ITeam";
 
 const { canShowNextButton, semiFinals, finals, finalWinner } =
   useTournamentStore();
-const playedMatches = reactive<IPlayedMatch[]>([]);
+const { playedMatches, simulateMatch } = useSimulateEliminate();
 
 const matches = [[finals.value[0][0], semiFinals.value[0][1]]];
-
-const simulateMatch = (firstTeam: ITeam, secondTeam: ITeam) => {
-  const firstTeamScore = Math.floor(Math.random() * 5);
-  const secondTeamScore = Math.floor(Math.random() * 5);
-
-  if (firstTeamScore === secondTeamScore) {
-    simulateMatch(firstTeam, secondTeam);
-    return;
-  }
-
-  const playedMatch: IPlayedMatch = {
-    id: `${firstTeam.id}-${secondTeam.id}`,
-    firstTeam,
-    secondTeam,
-    firstTeamScore,
-    secondTeamScore,
-  };
-
-  playedMatches.push(playedMatch);
-};
 
 onMounted(() => {
   matches.forEach((match) => {
