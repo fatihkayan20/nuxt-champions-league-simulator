@@ -16,6 +16,10 @@ const { hasEnoughTeams } = useTeamsStore();
       <LazySimulateGroupStage />
     </div>
 
+    <div v-if="activeStage === Stage.QuarterFinal">
+      <LazySimulateQuarterFinalStage />
+    </div>
+
     <div v-if="canShowNextButton">
       <LazyNextStepButton />
     </div>

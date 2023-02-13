@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ITeam } from "~~/types/ITeam";
-import { Stage } from "~~/types/Stage";
 
 const { allTeams } = useTeamsStore();
-const { canShowNextButton, activeStage } = useTournamentStore();
+const { canShowNextButton, quarterFinals } = useTournamentStore();
 
 const week = ref<1 | 2 | 3 | 4>(1);
 
@@ -59,16 +58,44 @@ const simulateMatch = (firstTeam: ITeam, secondTeam: ITeam) => {
   };
 };
 
+const getQuarterFinals = () => {
+  const groups = Object.keys(allTeams.value);
+
+  return groups.map((group) => {
+    return allTeams.value[group]
+      .sort((a: ITeam, b: ITeam) => {
+        if (a.points > b.points) {
+          return -1;
+        }
+
+        if (a.points < b.points) {
+          return 1;
+        }
+
+        if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
+          return -1;
+        }
+
+        if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
+          return 1;
+        }
+
+        return 0;
+      })
+      .slice(0, 2);
+  });
+};
+
 onMounted(() => {
   const interval = setInterval(() => {
     if (week.value === 4) {
-      activeStage.value = Stage.QuarterFinal;
       canShowNextButton.value = true;
+
+      quarterFinals.value = getQuarterFinals();
+
       clearInterval(interval);
       return;
     }
-
-    canShowNextButton.value = false;
 
     const groups = Object.values(allTeams.value);
 

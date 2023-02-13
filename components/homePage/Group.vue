@@ -1,30 +1,50 @@
 <script setup lang="ts">
 import { ITeam } from "~~/types/ITeam";
+import { Stage } from "~~/types/Stage";
 const props = defineProps<{
   teams: ITeam[];
   groupName: string;
 }>();
 
+const { activeStage } = useTournamentStore();
+
+const teamNeeded = computed(() => {
+  if (
+    activeStage.value === Stage.Final ||
+    activeStage.value === Stage.SemiFinal
+  ) {
+    return 1;
+  }
+
+  if (activeStage.value === Stage.QuarterFinal) {
+    return 2;
+  }
+
+  return 4;
+});
+
 const sortedTeams = computed(() => {
-  return props.teams.sort((a: ITeam, b: ITeam) => {
-    if (a.points > b.points) {
-      return -1;
-    }
+  return props.teams
+    .sort((a: ITeam, b: ITeam) => {
+      if (a.points > b.points) {
+        return -1;
+      }
 
-    if (a.points < b.points) {
-      return 1;
-    }
+      if (a.points < b.points) {
+        return 1;
+      }
 
-    if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
-      return -1;
-    }
+      if (a.goalFor - a.goalAgainst > b.goalFor - b.goalAgainst) {
+        return -1;
+      }
 
-    if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
-      return 1;
-    }
+      if (a.goalFor - a.goalAgainst < b.goalFor - b.goalAgainst) {
+        return 1;
+      }
 
-    return 0;
-  });
+      return 0;
+    })
+    .slice(0, teamNeeded.value);
 });
 </script>
 
