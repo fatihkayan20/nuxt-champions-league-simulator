@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { Stage } from "~~/types/Stage";
 
+useHead({
+  title: "Champions League Tournament Simulator",
+  meta: [
+    {
+      name: "description",
+      content: "Champions League Tournament Simulator",
+    },
+  ],
+});
+
 const { activeStage, canShowNextButton } = useTournamentStore();
 const { hasEnoughTeams } = useTeamsStore();
 </script>
