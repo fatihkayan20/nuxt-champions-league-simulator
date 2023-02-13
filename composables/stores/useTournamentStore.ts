@@ -14,6 +14,7 @@ export const useTournamentStore = () => {
   ]);
   const semiFinals = useState<ITeam[][]>("semiFinals", () => [[], []]);
   const finals = useState<ITeam[][]>("finals", () => [[]]);
+  const finalWinner = useState<ITeam | null>("finalWinner", () => null);
 
   watch(hasEnoughTeams, (newValue) => {
     if (newValue) {
@@ -27,5 +28,6 @@ export const useTournamentStore = () => {
     quarterFinals,
     semiFinals,
     finals,
+    finalWinner,
   };
 };

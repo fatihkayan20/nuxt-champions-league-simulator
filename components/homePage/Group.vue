@@ -6,7 +6,8 @@ const props = defineProps<{
   groupName: string;
 }>();
 
-const { activeStage, quarterFinals, semiFinals, finals } = useTournamentStore();
+const { activeStage, quarterFinals, semiFinals, finals, finalWinner } =
+  useTournamentStore();
 
 const teamNeeded = computed(() => {
   if (activeStage.value === Stage.QuarterFinal) {
@@ -21,6 +22,16 @@ const filterByGroup = (teams: ITeam[]) => {
 };
 
 const sortedTeams = computed(() => {
+  if (finalWinner.value?.group === props.groupName) {
+    return [finalWinner.value];
+  }
+  if (
+    finalWinner.value?.group &&
+    finalWinner.value?.group !== props.groupName
+  ) {
+    return [];
+  }
+
   const data = finals.value?.[0]?.[0]
     ? filterByGroup(finals.value.flat())
     : semiFinals.value?.[0]?.[0]
