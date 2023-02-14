@@ -1,42 +1,23 @@
-# Nuxt 3 Minimal Starter
+# Champions League Simulate Application
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+[Check Live Preview](https://champions-league-simulator.vercel.app/)
 
-## Setup
+## Used technologies
 
-Make sure to install the dependencies:
+- Nuxt3
+- Global/reusable composables
+- TailwindCss
 
-```bash
-# yarn
-yarn install
+## Screenshots in app
 
-# npm
-npm install
+![First you should add teams](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/team-selection.png?raw=true)
 
-# pnpm
-pnpm install
-```
+![Then Simulate Group Stage](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/group-stage.png?raw=true)
 
-## Development Server
+![Simulate Quarter Finals](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/quarter-final.png?raw=true)
 
-Start the development server on http://localhost:3000
+![Simulate Semi Finals](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/semi-final.png?raw=true)
 
-```bash
-npm run dev
-```
+![Simulate Final Finals](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/final.png?raw=true)
 
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+![There is the winner 🎉](https://github.com/fatihkayan20/nuxt-champions-league-simulator/blob/master/assets/githubImages/final.png?raw=true)
